@@ -18,6 +18,7 @@ Unique Elements: Like other set implementations, robin_set holds unique elements
 Order of Elements: Unlike ordered set implementations, robin_set does not maintain elements in any sorted order. Its primary goal is efficient hashing-based operations.
 
 #2
+
 In C++ standard library containers, including hash-based sets like robin_set, the comparison of the return value of the find method with container.end() is a common and idiomatic way to check if an element is present in the container. Let's break down why this is done:
 
 Functionality of find:
