@@ -7,3 +7,12 @@ if (node_set.find(id) != node_set.end()) { continue; }: This statement checks if
 node_set.find(id): This function call searches for id in node_set.
 node_set.end(): This represents an iterator to the end of node_set, which in C++ standard library containers is a position just past the last element.
 If id is found in node_set, the find method will not return node_set.end(), indicating the node is already processed. In that case, continue is executed, which skips the current iteration of the loop and moves to the next id.
+
+# Robin Set
+robin_set, typically from the tsl::robin_set library, is an implementation of a hash set based on the Robin Hood hashing technique. This type of hash set offers efficient average-case complexity for insertions, deletions, and searches. The key characteristics of robin_set that are relevant here are:
+
+Fast Lookup: The use of hash tables allows for constant average-time complexity for lookups (find operation). This is beneficial in your scenario, where the code frequently checks if a node is already in the set.
+
+Unique Elements: Like other set implementations, robin_set holds unique elements. Once a node is inserted into node_set, attempting to insert the same node again will have no effect. This ensures that each node is represented only once in the set.
+
+Order of Elements: Unlike ordered set implementations, robin_set does not maintain elements in any sorted order. Its primary goal is efficient hashing-based operations.
