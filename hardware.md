@@ -7,10 +7,13 @@ In summary, sectors are a broader concept used across different types of storage
 Basic Definition:
 
 A sector is the smallest unit of storage that can be read from or written to on a disk drive. It's like a tiny 'slot' on the disk where data is stored.
+
 Sector Size:
 
 Traditionally, the standard sector size was 512 bytes. However, with the advent of modern storage technologies, especially in larger drives, the sector size has been increased to 4 kilobytes (4096 bytes) in many cases, known as Advanced Format.
+
 Sectors in SSDs
+
 SSDs (Solid State Drives) use sectors similarly to how traditional Hard Disk Drives (HDDs) do, but with some differences due to their underlying technology:
 
 No Moving Parts:
