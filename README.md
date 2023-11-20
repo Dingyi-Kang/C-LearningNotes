@@ -30,3 +30,19 @@ end() Iterator:
 
 The end() iterator is a special iterator that denotes a position one past the last element of the container. It does not point to a valid element but rather serves as a sentinel to indicate the boundary of the container.
 Importantly, the end() iterator is used in C++ to represent a non-existent element or the scenario where an element is not found in the container.
+
+## standard practice in low-level disk I/O operations
+
+The inclusion of a buffer (`buf`) in each `AlignedRead` object, along with `len` and `offset`, is a standard practice in low-level disk I/O operations for several reasons:
+
+1. **Data Destination**: The `buf` field in each `AlignedRead` request specifies where in memory the data read from the disk should be stored. When the read operation is performed, the data from the specified `offset` on the disk is read into this memory location. Without specifying a buffer, the system wouldn't know where to place the incoming data.
+
+2. **Memory Management**: By specifying the buffer for each read operation, the code can precisely control how memory is used. This is important for efficiency, especially in high-performance or large-scale systems where memory usage can be a critical factor. It allows for the pre-allocation of memory and ensures that data is read directly into the correct location in memory.
+
+3. **Handling Multiple Reads**: If you are reading multiple different nodes (as is the case here), each read operation might require its own separate buffer space. The `buf` field ensures that each `AlignedRead` request writes to a unique memory location, preventing data from different read operations from overwriting each other.
+
+4. **Alignment Considerations**: For disk I/O, especially with SSDs or when dealing with large amounts of data, aligning read operations to certain boundaries (like disk sectors) can improve performance. The `buf` field can ensure that the buffer is appropriately aligned for these types of operations.
+
+5. **Flexibility and Clarity**: Including the buffer in the read request makes the code more flexible and clearer. The function or system responsible for executing the read requests doesn't need to make assumptions about where to store data; it's explicitly provided with each request.
+
+In summary, providing a `buf` in each `AlignedRead` object, alongside `len` for the length of the read and `offset` for the position on the disk to start reading from, is essential for effective and efficient data reading. It allows the system to know where to store the incoming data, manage memory effectively, handle multiple read operations concurrently, align reads for performance, and maintain clear and flexible code structure.
