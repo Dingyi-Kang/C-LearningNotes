@@ -46,3 +46,16 @@ The inclusion of a buffer (`buf`) in each `AlignedRead` object, along with `len`
 5. **Flexibility and Clarity**: Including the buffer in the read request makes the code more flexible and clearer. The function or system responsible for executing the read requests doesn't need to make assumptions about where to store data; it's explicitly provided with each request.
 
 In summary, providing a `buf` in each `AlignedRead` object, alongside `len` for the length of the read and `offset` for the position on the disk to start reading from, is essential for effective and efficient data reading. It allows the system to know where to store the incoming data, manage memory effectively, handle multiple read operations concurrently, align reads for performance, and maintain clear and flexible code structure.
+
+
+## Incrementing the pointer to an array of type T by one 
+
+Yes, exactly. In the context of the statement:
+
+```c
+memcpy(nbr_buffers[i].second, node_nhood + 1, num_nbrs * sizeof(uint32_t));
+```
+
+The expression `node_nhood + 1` is essentially incrementing the address pointed to by `node_nhood` by `1`. However, it's important to understand that this increment is in terms of the size of the data type to which `node_nhood` points, not just by one byte. Since `node_nhood` is a pointer to `uint32_t` (an unsigned 32-bit integer), adding `1` to it actually advances the pointer by `1 * sizeof(uint32_t)` bytes (which is typically 4 bytes on most systems).
+
+In simpler terms, `node_nhood + 1` points to the memory address immediately following the first `uint32_t` value in the `node_nhood` array. This is used in your code to skip over the first element of the array (which holds the number of neighbors) and start copying from the second element, which is where the actual list of neighbor IDs begins.
